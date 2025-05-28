@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reaction Time Test</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #box{
+            width: 333px; 
+            height:222px;
+            background-color: red;
+            margin: auto;
+            margin-top: 90px;
+            color: white;
+            font-size: xx-large;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100px;
+        }
+        #replay{
+            width: 150px;  
+            height: 70px;
+            background-color: rgb(255, 0, 0);
+            margin: auto;
+            margin-top: 50px;
+            color: rgba(252, 252, 252, 0.874);
+            font-size: large;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100px;
+        }
+        #average{
+            text-align: center;
+            margin-top: 50px;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+        <div id="savedAverage"></div>
+        <div id="average"> </div>
+        <div id="box">Wait for green...</div>
+        <button id="replay" onclick="startGame()">Play again!</button>
+       
+        <script>
+            let box = document.getElementById("box")
+            let averageElement = document.getElementById("average")
+            let startTime = 0
+            let endTime = 0
+            let reactionTime = 0
+            let timeToClick = false
+            let reactSpeedList = []
+
+            if(localStorage.getItem("savedAverage")){
+
+                let getAverage = localStorage.getItem("savedAverage")
+
+                let savedAverage = document.getElementById("savedAverage")
+                savedAverage.innerHTML = "Saved reaction speed: " + getAverage
+            }
+
+            function startGame(){
+                timeToClick = false
+                box.style.backgroundColor = "red"
+                box.innerHTML = "Wait for green..."
+                
+                setTimeout(setTimer, 3000);
+                function setTimer() {
+                    timeToClick = true
+                    box.style.backgroundColor = "green"
+                    box.innerHTML = "CLICK!"
+                    startTime = Date.now()               
+                }
+            }
+            startGame()
+            
+            
+            box.addEventListener("click", result)
+            function result (){
+                if (timeToClick){
+                    endTime = Date.now()  
+                    reactionTime = endTime - startTime
+                    box.innerHTML = reactionTime + " ms"  
+                    reactSpeedList.push(reactionTime)
+                    console.log(reactSpeedList)
+                    let averageTime = findAverage ()
+                    averageTime = Math.floor(averageTime)
+                    // console.log("Average Time", averageTime)
+                    averageElement.innerHTML = "Average reaction speed: " + averageTime
+
+                    let averageForStorage = JSON.stringify(averageTime)
+                    localStorage.setItem("savedAverage", averageForStorage);
+
+
+
+
+                } else{
+                    box.innerHTML = "Not yet!"
+                }
+            }
+
+            function findAverage(){
+                let total = 0
+                for(let i = 0; i<reactSpeedList.length; i++){
+                    total+=reactSpeedList[i]
+                }
+                let average = total/reactSpeedList.length
+                console.log("average: ", average)
+                    return average                    
+            }
+        </script>
+</body>
+</html>
