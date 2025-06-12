@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table</title>
+    <style>
+        table, tr, th, td{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Reaction Times
+    </h1>
+    <p id="s"></p>
+    <div id="table2"></div>
+    <script>
+        let arr = [23456, 2745, 46568 , 12345678, 534567890, 13243564571234567868, 864567890, "hay"]
+        let a = 23232
+        let b = 52627
+        let table = `
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Score (ms)</th>
+                </tr>
+            `
+       
+
+        let i = 0
+        while(i < arr.length){
+            table+="<tr> <td>" + (i+1) + "</td> <td>" + arr[i] + "</td> </tr>"
+            i++
+        }
+       
+
+
+        table+=" </table>"
+                
+
+        let s = "The boy loves ice cream!"
+        s = s+" He likes mint flavor."
+        document.getElementById("s").innerHTML = s
+        document.getElementById("table2").innerHTML = table
+
+
+    </script>
+</body>
+</html>

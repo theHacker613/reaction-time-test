@@ -48,6 +48,13 @@
         <div id="average"> </div>
         <div id="box">Wait for green...</div>
         <button id="replay" onclick="startGame()">Play again!</button>
+        <table id="table">
+            <tr>
+                <th>#</th>
+                <th>Score (ms)</th>
+            </tr>
+        </table>
+
        
         <script>
             let box = document.getElementById("box")
@@ -57,6 +64,8 @@
             let reactionTime = 0
             let timeToClick = false
             let reactSpeedList = []
+            let table = document.getElementById("table")
+
 
             if(localStorage.getItem("savedAverage")){
 
@@ -94,6 +103,17 @@
                     averageTime = Math.floor(averageTime)
                     // console.log("Average Time", averageTime)
                     averageElement.innerHTML = "Average reaction speed: " + averageTime
+
+                    table.innerHTML = `<tr>
+                                                <th>#</th>
+                                                <th>Score (ms)</th>
+                                            </tr>`
+                    let i = 0
+                    while(i < reactSpeedList.length){
+                        
+                        table.innerHTML+="<tr> <td>" + (i+1) + "</td> <td>" + reactSpeedList[i] + "</td> </tr>"
+                        i++
+                    }
 
                     let averageForStorage = JSON.stringify(averageTime)
                     localStorage.setItem("savedAverage", averageForStorage);
