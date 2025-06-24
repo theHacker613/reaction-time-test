@@ -14,39 +14,54 @@
 <body>
     <h1>
         Reaction Times
-    </h1>
+    </h1> 
+    <p>Input your name:</p>
+    <input type="text" id="input-name">
+    <p>Input a number:</p>
+    <input type="number" id="input-number">
+    <button id="input-button"> Enter</button>
     <p id="s"></p>
     <div id="table2"></div>
     <script>
-        let arr = [23456, 2745, 46568 , 12345678, 534567890, 13243564571234567868, 864567890, "hay"]
-        let a = 23232
-        let b = 52627
-        let table = `
+        let arr = []
+        let button = document.getElementById("input-button")
+        button.addEventListener("click", getValue)
+        function getValue(){
+            let name = document.getElementById("input-name")
+            let number = document.getElementById("input-number")
+            name = name.value
+            number = number.value
+            let userdata = {
+                name: name,
+                number: number
+            }
+            arr.push(userdata)
+            console.log("Array object: "+ arr[0].name +" "+arr[0].number)
+            updateTable() 
+            
+
+        }
+        
+        function updateTable(){
+            let table = `
             <table>
                 <tr>
                     <th>#</th>
+                    <th>Name</th>
                     <th>Score (ms)</th>
+                    
                 </tr>
             `
-       
+            let i = 0
+            while(i < arr.length){
+                // table+="<tr> <td>" + (i+1) + "</td> <td>" + arr[i].number + "</td> </tr>"
+                table+=`<tr> <td>${(i+1)}</td> <td>${arr[i].name}</td> <td>${arr[i].number}</td></tr>`
+                i++
+            }
 
-        let i = 0
-        while(i < arr.length){
-            table+="<tr> <td>" + (i+1) + "</td> <td>" + arr[i] + "</td> </tr>"
-            i++
+            table+=" </table>"                
+            document.getElementById("table2").innerHTML = table
         }
-       
-
-
-        table+=" </table>"
-                
-
-        let s = "The boy loves ice cream!"
-        s = s+" He likes mint flavor."
-        document.getElementById("s").innerHTML = s
-        document.getElementById("table2").innerHTML = table
-
-
     </script>
 </body>
 </html>
