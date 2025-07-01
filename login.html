@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Mockup</title>
+</head>
+<body>
+    <h1>sign up</h1>
+    <input id="name" type="text">
+    <input id="pass" type="text">
+    <button id="enter">Enter</button>
+    <script>
+        let name = document.getElementById("name")
+        let pass = document.getElementById("pass")
+        let enter = document.getElementById("enter")
+        
+         
+        enter.addEventListener("click", registerUser)
+        function registerUser(){
+            name = name.value
+            pass = pass.value
+            console.log("name, pass", name, pass)
+        }
+    </script>
+</body>
+</html>
