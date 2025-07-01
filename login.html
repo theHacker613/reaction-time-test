@@ -14,13 +14,19 @@
         let name = document.getElementById("name")
         let pass = document.getElementById("pass")
         let enter = document.getElementById("enter")
-        
+        let users = []
          
         enter.addEventListener("click", registerUser)
         function registerUser(){
             name = name.value
             pass = pass.value
             console.log("name, pass", name, pass)
+            let user = {
+                name: name,
+                pass: pass
+            }
+            users.push(user)
+            console.log(users)
         }
     </script>
 </body>
